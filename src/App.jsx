@@ -35,6 +35,7 @@ function Square({ value, onClick, highlight }) {
 export default function App() {
   const [squares, setSquares] = useState(Array(9).fill(null))
   const [isXNext, setIsXNext] = useState(true)
+  const [score, setScore] = useState({ X: 0, O: 0, draw: 0 })
 
   const result = calculateWinner(squares)
   const winner = result?.winner
@@ -50,8 +51,17 @@ export default function App() {
   }
 
   function resetGame() {
+    if (winner) {
+      setScore(prev => ({ ...prev, [winner]: prev[winner] + 1 }))
+    } else if (isDraw) {
+      setScore(prev => ({ ...prev, draw: prev.draw + 1 }))
+    }
     setSquares(Array(9).fill(null))
     setIsXNext(true)
+  }
+
+  function resetScore() {
+    setScore({ X: 0, O: 0, draw: 0 })
   }
 
   let status
@@ -66,6 +76,20 @@ export default function App() {
   return (
     <div className="app">
       <h1>Kółko i Krzyżyk</h1>
+      <div className="scoreboard">
+        <div className="score-item x">
+          <span className="score-label">Gracz X</span>
+          <span className="score-value">{score.X}</span>
+        </div>
+        <div className="score-item draw">
+          <span className="score-label">Remisy</span>
+          <span className="score-value">{score.draw}</span>
+        </div>
+        <div className="score-item o">
+          <span className="score-label">Gracz O</span>
+          <span className="score-value">{score.O}</span>
+        </div>
+      </div>
       <p className={`status ${winner ? 'winner' : isDraw ? 'draw' : ''}`}>
         {status}
       </p>
@@ -79,9 +103,14 @@ export default function App() {
           />
         ))}
       </div>
-      <button className="reset-btn" onClick={resetGame}>
-        Reset gry
-      </button>
+      <div className="buttons">
+        <button className="reset-btn" onClick={resetGame}>
+          {winner || isDraw ? 'Następna runda' : 'Reset gry'}
+        </button>
+        <button className="reset-score-btn" onClick={resetScore}>
+          Wyczyść wyniki
+        </button>
+      </div>
     </div>
   )
 }

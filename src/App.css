@@ -87,8 +87,50 @@ h1 {
   box-shadow: 0 0 12px rgba(100, 255, 218, 0.4);
 }
 
-.reset-btn {
+.scoreboard {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  justify-content: center;
+}
+
+.score-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: #0f3460;
+  border-radius: 10px;
+  padding: 10px 20px;
+  min-width: 80px;
+}
+
+.score-item.x { border-top: 3px solid #e94560; }
+.score-item.o { border-top: 3px solid #64b5f6; }
+.score-item.draw { border-top: 3px solid #ffb74d; }
+
+.score-label {
+  font-size: 0.75rem;
+  color: #a0a0c0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.score-value {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #e0e0ff;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
   margin-top: 8px;
+}
+
+.reset-btn {
   padding: 12px 36px;
   font-size: 1rem;
   font-weight: 700;
@@ -104,4 +146,22 @@ h1 {
 .reset-btn:hover {
   background: #64ffda;
   color: #1a1a2e;
+}
+
+.reset-score-btn {
+  padding: 6px 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border: 1px solid #555;
+  border-radius: 8px;
+  background: transparent;
+  color: #777;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.reset-score-btn:hover {
+  color: #aaa;
+  border-color: #aaa;
 }
